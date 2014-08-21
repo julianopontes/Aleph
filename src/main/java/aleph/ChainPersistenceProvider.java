@@ -2,25 +2,17 @@ package aleph;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class ChainPersistenceProvider implements PersistenceProvider {
-	private final List<PersistenceProvider> providers;
 
-	public ChainPersistenceProvider(List<PersistenceProvider> providers) {
-		this.providers = providers;
-	}
+	@Autowired
+	private List<PersistenceProvider> providers;
 
 	@Override
-	public void save(AbstractBuilder<?> builder) {
+	public void save(List<AbstractBuilder<?>> builders) {
 		for (PersistenceProvider p : providers) {
-			p.save(builder);
-		}
-
-	}
-
-	@Override
-	public void close() {
-		for (PersistenceProvider p : providers) {
-			p.close();
+			p.save(builders);
 		}
 
 	}

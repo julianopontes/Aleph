@@ -1,11 +1,11 @@
 package aleph;
 
+import java.util.List;
+
 public interface PersistenceProvider {
 
-	void save(AbstractBuilder<?> builder);
-
-	void close();
-
+	void save(List<AbstractBuilder<?>> builder);
+	
 	void clear();
 
 }

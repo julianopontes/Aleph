@@ -1,7 +1,6 @@
 package aleph;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class TestPersistentContext {
@@ -18,13 +17,15 @@ public class TestPersistentContext {
 	}
 
 	public void saveAll() {
+
 		ChainPersistenceProvider persistenceProvider = ContextUtil.getBean(ChainPersistenceProvider.class);
-		Iterator<AbstractBuilder<?>> iterator = builders.iterator();
-		while (iterator.hasNext()) {
-			persistenceProvider.save(iterator.next());
-			iterator.remove();
-		}
-		persistenceProvider.close();
+		persistenceProvider.save(builders);
+		builders.clear();
+	}
+
+	public void clear() {
+		ChainPersistenceProvider persistenceProvider = ContextUtil.getBean(ChainPersistenceProvider.class);
+		persistenceProvider.clear();
 	}
 
 	public static TestPersistentContext get() {
@@ -32,12 +33,6 @@ public class TestPersistentContext {
 			ctx = new TestPersistentContext();
 		}
 		return ctx;
-	}
-
-	public void clear() {
-		ChainPersistenceProvider persistenceProvider = ContextUtil.getBean(ChainPersistenceProvider.class);
-		persistenceProvider.clear();
-
 	}
 
 }
