@@ -38,6 +38,6 @@ public class TestPersistentContext {
 		ChainPersistenceProvider persistenceProvider = ContextUtil.getBean(ChainPersistenceProvider.class);
 		persistenceProvider.clear();
 
+		builders.clear();
 	}
-
 }
